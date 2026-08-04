@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- loc は独自ドメイン確定後に差し替える（要件§8） -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://（ドメイン確定後に記入）/</loc>
+  </url>
+</urlset>

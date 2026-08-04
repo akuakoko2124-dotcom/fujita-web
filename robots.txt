@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 独自ドメイン確定後に有効化する:
+# Sitemap: https://（ドメイン確定後に記入）/sitemap.xml
