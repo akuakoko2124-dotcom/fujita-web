@@ -1,0 +1,30 @@
+---
+---
+<section id="concept">
+  <div class="concept-grid">
+    <div class="reveal">
+      <p class="eyebrow">想い</p>
+      <h2 class="sec-title">奇をてらわず、正統に。</h2>
+      <p class="lead">コースはありません。その日の朝、店主・藤田が豊洲で目利きした魚と旬の素材が、お品書きに並びます。焼き魚をもう一皿、〆は土鍋ご飯。好きなものを、好きなように——それが「楽食」です。</p>
+      <p class="lead">日本酒は、店主の故郷・福島の地酒を中心に。肩肘張らずに、大人がゆったり過ごせる二十席の割烹です。</p>
+    </div>
+    <div class="concept-tate reveal">
+      今日の魚と、<br>今日の酒と。
+    </div>
+  </div>
+</section>
+
+<style>
+/* ---------- 想い ---------- */
+.concept-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.concept-tate{
+  writing-mode:vertical-rl;
+  font-size:clamp(20px,2.2vw,26px);
+  letter-spacing:.3em;line-height:2.3;
+  min-height:300px;margin:0 auto;
+}
+@media (max-width:860px){
+  .concept-grid{grid-template-columns:1fr;gap:40px}
+  .concept-tate{min-height:240px;margin:0}
+}
+</style>

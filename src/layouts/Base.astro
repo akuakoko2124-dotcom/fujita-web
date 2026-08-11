@@ -1,0 +1,213 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "楽食ふじた｜中目黒・日本料理",
+  description = "中目黒の日本料理店・楽食ふじた。毎朝豊洲で仕入れる旬の魚を、お好みのアラカルトで。",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content={description}>
+<!-- 本公開判断（写真投入後）まで noindex を維持する（実装指示書§2.4-5） -->
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<!-- OGP: og:url・og:image のドメイン部分は独自ドメイン確定後（要件§8）に差し替える -->
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://（ドメイン確定後に記入）/">
+<meta property="og:image" content="https://（ドメイン確定後に記入）/ogp.jpg">
+<style is:global>
+:root{
+  --sumi:#131010;
+  --sumi2:#1b1714;
+  --sumi3:#221d18;
+  --ink:#eae1d3;
+  --dim:#c6bba9;
+  --mut:#857b6e;
+  --shu:#b34a2b;
+  --shu-soft:#d98a68;
+  --line:rgba(234,225,211,.13);
+  --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","MS PMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--sumi);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-feature-settings:"palt";
+  line-height:2;
+  letter-spacing:.08em;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--shu-soft);outline-offset:3px}
+::selection{background:var(--shu);color:var(--ink)}
+
+/* ---------- フィルム粒子（全体） ---------- */
+body::after{
+  content:"";position:fixed;inset:0;z-index:60;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.045;
+}
+
+/* ---------- 写真の共通トーン ----------
+   スマホ写真でも墨のトーンに馴染むよう、
+   彩度を落とし、わずかに暖色へ寄せて統一する */
+.photo{
+  position:relative;overflow:hidden;
+  background:var(--sumi2);
+  border-radius:2px;
+}
+.photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.8) contrast(1.06) brightness(.9) sepia(.1);
+}
+.photo::after{ /* うっすら墨をかける */
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(19,16,16,.1),rgba(19,16,16,.28));
+  pointer-events:none;
+}
+.photo .ph-label{display:none}
+.photo.missing{
+  border:1px dashed rgba(133,123,110,.45);
+}
+.photo.missing .ph-label{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:20px;
+  font-family:var(--sans);font-size:11px;letter-spacing:.12em;line-height:1.9;
+  color:var(--mut);
+}
+
+/* ---------- 暖簾ローダー ---------- */
+#noren{
+  position:fixed;inset:0;z-index:100;
+  background:var(--sumi);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .9s ease,visibility .9s;
+}
+#noren .noren-logo{
+  writing-mode:vertical-rl;
+  font-size:clamp(22px,4vw,30px);
+  letter-spacing:.5em;
+  color:var(--ink);
+  opacity:0;
+  animation:norenIn 1.1s ease .15s forwards;
+}
+#noren.done{opacity:0;visibility:hidden}
+@keyframes norenIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- 共通セクション ---------- */
+section{padding:110px 8vw;border-top:1px solid var(--line)}
+.eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.35em;color:var(--shu-soft);margin-bottom:26px}
+.sec-title{font-size:clamp(24px,3vw,32px);font-weight:500;letter-spacing:.25em;margin-bottom:36px}
+.lead{max-width:38em;color:var(--dim);font-size:15px}
+.lead + .lead{margin-top:1.4em}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width:860px){
+  section{padding:80px 6vw}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #noren{display:none}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+<!-- GA4 -->
+<script is:inline>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+(function(){
+  var GA4_ID = ""; /* TODO: 発行後に測定IDを記入 */
+  if(!/^G-[A-Z0-9]+$/.test(GA4_ID)) return;
+  var s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+  document.head.appendChild(s);
+  gtag("js", new Date());
+  gtag("config", GA4_ID);
+})();
+</script>
+<!-- JSON-LD -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "楽食ふじた",
+  "servesCuisine": "日本料理",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "JP",
+    "addressRegion": "東京都",
+    "addressLocality": "目黒区",
+    "streetAddress": "中目黒2-0-16 ウィングルビル1F"
+  },
+  "telephone": "+81-3-6451-2969",
+  "url": "https://（ドメイン確定後に記入）",
+  "acceptsReservations": "True",
+  "priceRange": "￥￥￥"
+}
+</script>
+</head>
+<body>
+
+<div id="noren" aria-hidden="true">
+  <div class="noren-logo">楽食ふじた</div>
+</div>
+
+<slot />
+
+<script is:inline>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- 暖簾ローダー ---- */
+  var noren = document.getElementById("noren");
+  var hero = document.getElementById("hero");
+  function openNoren(){
+    if(noren) noren.classList.add("done");
+    if(hero) hero.classList.add("ready");
+    if(window.splitTitle) window.splitTitle();
+  }
+  if(reduce){ openNoren(); }
+  else{ window.addEventListener("load", function(){ setTimeout(openNoren, 1100); });
+        setTimeout(openNoren, 2600); /* 保険 */ }
+
+  /* ---- スクロール連動 ---- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+  /* GA4 Reserve Events */
+  function bind(selector, name){
+    document.querySelectorAll(selector).forEach(function(a){
+      a.addEventListener("click", function(){
+        if(typeof window.gtag === "function"){ window.gtag("event", name); }
+      });
+    });
+  }
+  bind('a[href^="tel:"]', "reserve_tel");
+  bind('a[href*="tabelog.com"]', "reserve_tabelog");
+  bind('a[href*="ikyu.com"]', "reserve_ikyu");
+})();
+</script>
+</body>
+</html>

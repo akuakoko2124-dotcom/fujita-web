@@ -1,0 +1,36 @@
+---
+---
+<section id="reserve">
+  <p class="eyebrow reveal">ご予約</p>
+  <h2 class="sec-title reveal">お席のご予約</h2>
+  <p class="lead reveal">お電話、または各予約サイトよりご予約いただけます。</p>
+  <div class="reserve-actions reveal">
+    <a class="btn primary" href="tel:0364512969">03-6451-2969<small>タップで発信できます</small></a>
+    <a class="btn" href="https://tabelog.com/tokyo/A1317/A131701/13166724/" target="_blank" rel="noopener">食べログで予約<small>ネット予約ページへ</small></a>
+    <a class="btn" href="https://restaurant.ikyu.com/119193" target="_blank" rel="noopener">一休で予約<small>ネット予約ページへ</small></a>
+  </div>
+  <p class="reserve-note reveal">※現在は外部予約サイトへご案内しています。自社予約システムは今後導入予定です。</p>
+</section>
+
+<style>
+/* ---------- ご予約 ---------- */
+#reserve{text-align:center}
+#reserve .sec-title{margin-bottom:20px}
+#reserve .lead{margin:0 auto 44px}
+.reserve-actions{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.btn{
+  display:inline-block;
+  padding:16px 38px;
+  font-size:14px;letter-spacing:.25em;text-indent:.25em;
+  border-radius:2px;
+  border:1px solid var(--line);
+  color:var(--dim);
+  transition:border-color .3s,color .3s,background .3s;
+  font-family:var(--serif);
+}
+.btn:hover{border-color:var(--dim);color:var(--ink)}
+.btn.primary{background:var(--shu);border-color:var(--shu);color:#f6efe4;font-size:15px}
+.btn.primary:hover{background:#c85c3a;border-color:#c85c3a}
+.btn small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:inherit;opacity:.75;margin-top:6px}
+.reserve-note{margin-top:30px;font-family:var(--sans);font-size:11px;color:var(--mut);letter-spacing:.12em}
+</style>

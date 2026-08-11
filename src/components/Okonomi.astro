@@ -1,0 +1,91 @@
+---
+import { getMenus } from '../lib/microcms';
+
+// microCMSからデータを取得（APIキーがない場合はダミーデータが返る）
+const response = await getMenus({ limit: 100, orders: 'order' });
+const allMenus = response.contents || [];
+
+// 写真付きのメイン料理（featured: true の先頭3件）
+const featuredMenus = allMenus.filter(m => m.featured).slice(0, 3);
+// それ以外（ほかにも）
+const otherMenus = allMenus.filter(m => !featuredMenus.includes(m));
+---
+<section id="okonomi">
+  <p class="eyebrow reveal">本日のお品書き</p>
+  <div class="okonomi-head reveal">
+    <h2 class="sec-title" style="margin-bottom:0">今朝の豊洲より</h2>
+    <span class="okonomi-date" id="today">—</span>
+    <span class="okonomi-note">※仕入れにより毎日変わります</span>
+  </div>
+
+  <div class="dish-grid reveal">
+    {featuredMenus.map((menu) => (
+      <figure class="dish">
+        <div class="photo">
+          <img src={menu.photo?.url || "/images/dish-01.jpg"} alt={menu.name}
+               onerror="this.closest('.photo').classList.add('missing');this.remove()" />
+          <span class="ph-label">{menu.name}<br />画像がありません</span>
+        </div>
+        <figcaption>
+          <p class="nm">{menu.name}</p>
+          {menu.nameEn && <p class="en">{menu.nameEn}</p>}
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  {otherMenus.length > 0 && (
+    <div class="menu-etc reveal">
+      <span class="cap">ほかにも</span>
+      {otherMenus.map((menu) => (
+        <span>{menu.name}</span>
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+/* ---------- 本日のお品書き ---------- */
+.okonomi-head{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;margin-bottom:40px}
+.okonomi-date{font-size:14px;color:var(--dim);letter-spacing:.2em}
+.okonomi-note{font-family:var(--sans);font-size:11px;color:var(--mut);letter-spacing:.1em}
+.dish-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:clamp(24px,3vw,44px);
+}
+.dish .photo{aspect-ratio:4/5}
+.dish .photo img{transition:transform 1.2s ease}
+.dish:hover .photo img{transform:scale(1.04)}
+.dish figcaption{margin-top:18px}
+.dish .nm{font-size:17px;letter-spacing:.18em}
+.dish .en{font-family:var(--sans);font-size:10px;letter-spacing:.18em;color:var(--mut);margin-top:6px}
+.menu-etc{
+  margin-top:48px;padding-top:28px;border-top:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline;
+}
+.menu-etc .cap{font-family:var(--sans);font-size:11px;letter-spacing:.25em;color:var(--mut);margin-right:6px}
+.menu-etc span{font-size:14px;color:var(--dim);letter-spacing:.12em}
+
+@media (prefers-reduced-motion:reduce){
+  .dish .photo img{transition:none}
+}
+</style>
+
+<script is:inline>
+(function(){
+  /* ---- 今日の日付（漢数字） ---- */
+  var K = "〇一二三四五六七八九";
+  function kd(n){
+    if(n<10) return K[n];
+    if(n===10) return "十";
+    var t = Math.floor(n/10), o = n%10;
+    return (t>1?K[t]:"") + "十" + (o?K[o]:"");
+  }
+  var now = new Date();
+  var youbi = ["日","月","火","水","木","金","土"][now.getDay()];
+  var td = document.getElementById("today");
+  if(td){
+    td.textContent = kd(now.getMonth()+1) + "月" + kd(now.getDate()) + "日（" + youbi + "）";
+  }
+})();
+</script>

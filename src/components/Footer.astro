@@ -1,0 +1,28 @@
+---
+---
+<footer>
+  <p class="f-brand">楽食ふじた</p>
+  <nav class="f-links" aria-label="フッターナビゲーション">
+    <a href="#okonomi">お品書き</a>
+    <a href="#info">アクセス</a>
+    <a href="#reserve">ご予約</a>
+    <!-- INSTAGRAM はURL確定後に公開する
+    <a href="#" aria-label="Instagram">INSTAGRAM</a>
+    -->
+  </nav>
+  <p class="f-copy">© RAKUSHOKU FUJITA</p>
+</footer>
+
+<style>
+/* ---------- フッター ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:44px 8vw 60px;
+  display:flex;flex-wrap:wrap;gap:20px;
+  align-items:center;justify-content:space-between;
+}
+.f-brand{letter-spacing:.35em;font-size:15px}
+.f-links{display:flex;gap:26px;font-family:var(--sans);font-size:11px;letter-spacing:.15em;color:var(--mut)}
+.f-links a:hover{color:var(--dim)}
+.f-copy{font-family:var(--sans);font-size:10px;color:var(--mut);letter-spacing:.12em}
+</style>

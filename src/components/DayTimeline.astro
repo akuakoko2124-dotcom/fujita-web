@@ -1,0 +1,48 @@
+---
+---
+<section id="day">
+  <p class="eyebrow reveal">ふじたの一日</p>
+  <h2 class="sec-title reveal">暖簾がかかるまで</h2>
+  <div class="timeline reveal">
+    <div class="tl-item">
+      <p class="tm">5:00</p>
+      <h3>豊洲で目利き</h3>
+      <p>その日いちばん良い魚だけを、店主自身の目で選びます。</p>
+    </div>
+    <div class="tl-item">
+      <p class="tm">14:00</p>
+      <h3>出汁と仕込み</h3>
+      <p>出汁を引き、魚をおろす。いちばん静かで、いちばん大事な時間。</p>
+    </div>
+    <div class="tl-item">
+      <p class="tm">17:30</p>
+      <h3>暖簾がかかる</h3>
+      <p>中目黒の路地に灯りがともります。カウンターへどうぞ。</p>
+    </div>
+    <div class="tl-item">
+      <p class="tm">20:00</p>
+      <h3>今日の一皿</h3>
+      <p>繊細な火入れの焼き魚に、福島の酒。〆は炊きたての土鍋ご飯で。</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ---------- 暖簾がかかるまで（タイポグラフィのみ） ---------- */
+.timeline{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);
+}
+.tl-item{background:var(--sumi);padding:34px 26px}
+.tl-item .tm{font-family:var(--sans);font-size:13px;letter-spacing:.2em;color:var(--shu-soft)}
+.tl-item h3{font-size:17px;font-weight:500;letter-spacing:.18em;margin:14px 0 10px}
+.tl-item p{font-size:13px;color:var(--dim);line-height:1.9}
+
+@media (max-width:860px){
+  .timeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .timeline{grid-template-columns:1fr}
+}
+</style>

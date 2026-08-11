@@ -1,0 +1,48 @@
+---
+import { getInfo } from '../lib/microcms';
+
+const info = await getInfo();
+---
+<section id="info">
+  <p class="eyebrow reveal">店舗情報・アクセス</p>
+  <h2 class="sec-title reveal">中目黒の路地で</h2>
+  <div class="info-grid">
+    <table class="info-table reveal">
+      <tr><th>店名</th><td>楽食ふじた</td></tr>
+      <tr><th>住所</th><td>東京都目黒区中目黒2-0-16 ウィングルビル1F</td></tr>
+      <tr><th>アクセス</th><td>東急東横線・日比谷線「中目黒駅」より徒歩数分</td></tr>
+      <tr><th>電話</th><td><a href="tel:0364512969">03-6451-2969</a></td></tr>
+      <tr><th>営業時間</th><td set:html={info.hours.replace(/\n/g, '<br/>')} /></tr>
+      {info.holiday && <tr><th>定休日</th><td>{info.holiday}</td></tr>}
+      <tr><th>席数</th><td>カウンター・テーブル 約20席</td></tr>
+      {info.note && <tr><th>備考</th><td set:html={info.note.replace(/\n/g, '<br/>')} /></tr>}
+    </table>
+    <div class="info-photo reveal">
+      <div class="photo">
+        <img src="/images/interior-03.jpg" alt="店舗外観"
+             onerror="this.closest('.photo').classList.add('missing');this.remove()">
+        <span class="ph-label">店内写真④（任意）<br>（推奨：夜の外観・暖簾）<br>images/interior-03.jpg ／ 無ければこの枠は地図に差し替え</span>
+      </div>
+      <p>実装時はここに Google マップの埋め込みを併設します。</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ---------- 店舗情報 ---------- */
+.info-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+.info-table{width:100%;border-collapse:collapse;font-size:14px}
+.info-table th,.info-table td{
+  text-align:left;vertical-align:top;
+  padding:16px 0;border-bottom:1px solid var(--line);
+  font-weight:400;letter-spacing:.1em;
+}
+.info-table th{width:8em;color:var(--mut);font-family:var(--sans);font-size:12px;letter-spacing:.25em}
+.info-table td{color:var(--dim)}
+.info-photo .photo{aspect-ratio:16/10}
+.info-photo p{margin-top:14px;font-family:var(--sans);font-size:11px;color:var(--mut);letter-spacing:.12em}
+
+@media (max-width:860px){
+  .info-grid{grid-template-columns:1fr;gap:40px}
+}
+</style>

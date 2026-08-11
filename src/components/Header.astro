@@ -1,0 +1,58 @@
+---
+---
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="#top">楽食ふじた</a>
+  <nav class="gnav" aria-label="グローバルナビゲーション">
+    <a href="#okonomi">お品書き</a>
+    <a href="#interior">店内</a>
+    <a href="#info">アクセス</a>
+    <a class="btn-reserve" href="#reserve">ご予約</a>
+  </nav>
+</header>
+
+<style>
+/* ---------- ヘッダー ---------- */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 5vw;
+  transition:background .4s ease,padding .4s ease,border-color .4s ease;
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{
+  background:rgba(19,16,16,.86);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  padding:14px 5vw;
+  border-bottom-color:var(--line);
+}
+.brand{font-size:18px;letter-spacing:.4em}
+.gnav{display:flex;align-items:center;gap:30px}
+.gnav a{font-size:13px;letter-spacing:.2em;color:var(--dim);transition:color .3s}
+.gnav a:hover{color:var(--ink)}
+.btn-reserve{
+  display:inline-block;
+  background:var(--shu);
+  color:#f6efe4 !important;
+  padding:10px 24px;
+  font-size:13px;letter-spacing:.3em;text-indent:.3em;
+  border-radius:2px;
+  transition:background .3s;
+}
+.btn-reserve:hover{background:#c85c3a}
+
+@media (max-width:860px){
+  .gnav a:not(.btn-reserve){display:none}
+}
+</style>
+
+<script is:inline>
+(function(){
+  var header = document.getElementById("siteHeader");
+  if(header){
+    window.addEventListener("scroll", function(){
+      header.classList.toggle("scrolled", window.scrollY > 40);
+    }, {passive:true});
+  }
+})();
+</script>

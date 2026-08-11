@@ -1,0 +1,45 @@
+---
+---
+<section id="interior">
+  <p class="eyebrow reveal">店内</p>
+  <h2 class="sec-title reveal">二十席の、ちょうどいい距離。</h2>
+  <div class="interior-grid">
+    <figure class="interior-a reveal">
+      <div class="photo">
+        <img src="/images/interior-01.jpg" alt="カウンター席"
+             onerror="this.closest('.photo').classList.add('missing');this.remove()">
+        <span class="ph-label">店内写真②<br>（推奨：カウンター席・縦位置）<br>images/interior-01.jpg</span>
+      </div>
+    </figure>
+    <div class="interior-b reveal">
+      <figure>
+        <div class="photo">
+          <img src="/images/interior-02.jpg" alt="店内の設え"
+               onerror="this.closest('.photo').classList.add('missing');this.remove()">
+          <span class="ph-label">店内写真③<br>（推奨：設え・器・酒瓶など寄り）<br>images/interior-02.jpg</span>
+        </div>
+      </figure>
+      <div class="interior-copy">
+        <p class="lead">カウンター越しに火の音が届く距離。ひとりでも、ふたりでも。今日の魚のこと、福島の酒のこと、店主に気軽にお尋ねください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ---------- 店内（写真2枚・段違い） ---------- */
+.interior-grid{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
+  gap:clamp(28px,4vw,60px);
+  align-items:start;
+}
+.interior-a .photo{aspect-ratio:3/4}
+.interior-b{margin-top:96px}
+.interior-b .photo{aspect-ratio:4/3}
+.interior-copy{margin-top:34px}
+.interior-copy .lead{font-size:14px}
+@media (max-width:860px){
+  .interior-grid{grid-template-columns:1fr}
+  .interior-b{margin-top:0}
+}
+</style>

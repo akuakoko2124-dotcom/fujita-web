@@ -1,0 +1,169 @@
+---
+---
+<div class="hero" id="hero">
+  <figure class="photo hero-photo">
+    <img src="/images/hero.jpg" alt="楽食ふじたの店内カウンター"
+         onerror="this.closest('figure').classList.add('missing');this.remove()">
+    <span class="ph-label">店内写真①（推奨：カウンター全景・夜の照明）<br>ファイル名 images/hero.jpg で配置してください</span>
+  </figure>
+
+  <div class="hero-copy">
+    <h1 class="hero-title" id="heroTitle">旬を、お好みで。</h1>
+    <p class="hero-sub">中目黒・日本料理　楽食ふじた</p>
+  </div>
+
+  <div class="sekki">
+    <div class="sekki-seal" id="sekkiSeal">—</div>
+    <p class="sekki-text">
+      <b id="sekkiYomi">にじゅうしせっき</b>
+      二十四節気とともに、<br>色と言葉が移ろうサイトです
+    </p>
+  </div>
+
+  <div class="scroll-cue">SCROLL</div>
+</div>
+
+<style>
+/* ---------- ヒーロー（写真1枚＋ケンバーンズ） ---------- */
+.hero{
+  position:relative;
+  height:100vh;height:100svh;min-height:640px;
+  overflow:hidden;
+}
+.hero .hero-photo{
+  position:absolute;inset:0;border-radius:0;background:var(--sumi2);
+}
+.hero .hero-photo img{
+  filter:saturate(.75) contrast(1.05) brightness(.82) sepia(.12);
+}
+:global(.hero.ready) .hero-photo img{
+  animation:kenburns 24s ease-out both;
+}
+@keyframes kenburns{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+.hero .hero-photo::after{
+  background:
+    linear-gradient(90deg,rgba(19,16,16,.35) 0%,transparent 45%,rgba(19,16,16,.55) 100%),
+    linear-gradient(180deg,rgba(19,16,16,.6) 0%,rgba(19,16,16,.15) 40%,rgba(19,16,16,.92) 100%);
+}
+.hero .hero-photo .ph-label{font-size:12px}
+.hero-copy{
+  position:absolute;top:0;right:8vw;z-index:4;
+  display:flex;flex-direction:row-reverse;
+  gap:clamp(18px,3vw,40px);
+  padding-top:clamp(110px,16vh,170px);
+}
+.hero-title{
+  writing-mode:vertical-rl;
+  font-size:clamp(34px,5.2vw,58px);
+  font-weight:500;
+  letter-spacing:.3em;
+  line-height:1.6;
+  color:#f2eadd;
+  text-shadow:0 0 30px rgba(19,16,16,.6);
+}
+:global(.hero-title .ch){opacity:0;display:inline-block}
+:global(.hero-title .ch.on){animation:chIn 1s ease forwards}
+@keyframes chIn{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:translateX(0)}}
+.hero-sub{
+  writing-mode:vertical-rl;
+  font-size:clamp(13px,1.4vw,15px);
+  letter-spacing:.4em;
+  color:var(--dim);
+  padding-top:6px;
+  text-shadow:0 0 20px rgba(19,16,16,.7);
+  opacity:0;transition:opacity 1.4s ease .9s;
+}
+:global(.hero.ready) .hero-sub{opacity:1}
+.sekki{
+  position:absolute;left:5vw;bottom:110px;z-index:4;
+  display:flex;align-items:center;gap:16px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity 1s ease 1.3s,transform 1s ease 1.3s;
+}
+:global(.hero.ready) .sekki{opacity:1;transform:translateY(0)}
+.sekki-seal{
+  writing-mode:vertical-rl;
+  border:1px solid var(--shu);
+  background:rgba(19,16,16,.45);
+  color:var(--shu-soft);
+  font-size:15px;letter-spacing:.35em;
+  padding:12px 8px 8px;
+  border-radius:2px;
+  min-height:84px;
+  display:flex;align-items:center;
+}
+.sekki-text{
+  font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--mut);line-height:1.9;
+  text-shadow:0 0 14px rgba(19,16,16,.8);
+}
+.sekki-text b{display:block;font-weight:400;color:var(--dim);font-size:12px}
+.scroll-cue{
+  position:absolute;right:5vw;bottom:34px;z-index:4;
+  font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--mut);
+  display:flex;align-items:center;gap:10px;
+}
+.scroll-cue::after{
+  content:"";width:1px;height:44px;background:var(--mut);
+  animation:cue 2.2s ease-in-out infinite;transform-origin:top;
+}
+@keyframes cue{0%{transform:scaleY(0)}55%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+@media (max-width:860px){
+  .sekki{bottom:96px}
+}
+@media (prefers-reduced-motion:reduce){
+  :global(.hero.ready) .hero-photo img{animation:none}
+  .scroll-cue::after{animation:none}
+  :global(.hero-title .ch){opacity:1 !important;animation:none !important}
+  .hero-sub,.sekki{opacity:1 !important;transform:none !important;transition:none}
+}
+</style>
+
+<script is:inline>
+(function(){
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var splitted = false;
+  window.splitTitle = function(){
+    if(splitted) return; splitted = true;
+    var el = document.getElementById("heroTitle");
+    if(!el) return;
+    var text = el.textContent;
+    el.textContent = "";
+    for(var i=0;i<text.length;i++){
+      var s = document.createElement("span");
+      s.className = "ch";
+      s.textContent = text[i];
+      if(!reduce){ s.style.animationDelay = (0.15 + i*0.12) + "s"; }
+      s.classList.add("on");
+      el.appendChild(s);
+    }
+  };
+
+  /* ---- 二十四節気（近似日付） ---- */
+  var SEKKI = [
+    [1,5,"小寒","しょうかん"],[1,20,"大寒","だいかん"],
+    [2,4,"立春","りっしゅん"],[2,19,"雨水","うすい"],
+    [3,5,"啓蟄","けいちつ"],[3,20,"春分","しゅんぶん"],
+    [4,4,"清明","せいめい"],[4,20,"穀雨","こくう"],
+    [5,5,"立夏","りっか"],[5,21,"小満","しょうまん"],
+    [6,5,"芒種","ぼうしゅ"],[6,21,"夏至","げし"],
+    [7,7,"小暑","しょうしょ"],[7,22,"大暑","たいしょ"],
+    [8,7,"立秋","りっしゅう"],[8,23,"処暑","しょしょ"],
+    [9,7,"白露","はくろ"],[9,23,"秋分","しゅうぶん"],
+    [10,8,"寒露","かんろ"],[10,23,"霜降","そうこう"],
+    [11,7,"立冬","りっとう"],[11,22,"小雪","しょうせつ"],
+    [12,7,"大雪","たいせつ"],[12,21,"冬至","とうじ"]
+  ];
+  var now = new Date();
+  var cur = SEKKI[SEKKI.length-1]; /* 年始は冬至扱い */
+  var m = now.getMonth()+1, d = now.getDate();
+  for(var i=0;i<SEKKI.length;i++){
+    var s = SEKKI[i];
+    if(m > s[0] || (m === s[0] && d >= s[1])) cur = s;
+  }
+  var seal = document.getElementById("sekkiSeal");
+  var yomi = document.getElementById("sekkiYomi");
+  if(seal) seal.textContent = cur[2];
+  if(yomi) yomi.textContent = cur[3];
+})();
+</script>
