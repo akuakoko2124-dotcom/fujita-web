@@ -12,14 +12,6 @@
     <p class="hero-sub">中目黒・日本料理　楽食ふじた</p>
   </div>
 
-  <div class="sekki">
-    <div class="sekki-seal" id="sekkiSeal">—</div>
-    <p class="sekki-text">
-      <b id="sekkiYomi">にじゅうしせっき</b>
-      二十四節気とともに、<br>色と言葉が移ろうサイトです
-    </p>
-  </div>
-
   <div class="scroll-cue">SCROLL</div>
 </div>
 
@@ -74,29 +66,7 @@
   opacity:0;transition:opacity 1.4s ease .9s;
 }
 :global(.hero.ready) .hero-sub{opacity:1}
-.sekki{
-  position:absolute;left:5vw;bottom:110px;z-index:4;
-  display:flex;align-items:center;gap:16px;
-  opacity:0;transform:translateY(8px);
-  transition:opacity 1s ease 1.3s,transform 1s ease 1.3s;
-}
-:global(.hero.ready) .sekki{opacity:1;transform:translateY(0)}
-.sekki-seal{
-  writing-mode:vertical-rl;
-  border:1px solid var(--shu);
-  background:rgba(19,16,16,.45);
-  color:var(--shu-soft);
-  font-size:15px;letter-spacing:.35em;
-  padding:12px 8px 8px;
-  border-radius:2px;
-  min-height:84px;
-  display:flex;align-items:center;
-}
-.sekki-text{
-  font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--mut);line-height:1.9;
-  text-shadow:0 0 14px rgba(19,16,16,.8);
-}
-.sekki-text b{display:block;font-weight:400;color:var(--dim);font-size:12px}
+
 .scroll-cue{
   position:absolute;right:5vw;bottom:34px;z-index:4;
   font-family:var(--sans);font-size:10px;letter-spacing:.3em;color:var(--mut);
@@ -108,14 +78,11 @@
 }
 @keyframes cue{0%{transform:scaleY(0)}55%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
 
-@media (max-width:860px){
-  .sekki{bottom:96px}
-}
 @media (prefers-reduced-motion:reduce){
   :global(.hero.ready) .hero-photo img{animation:none}
   .scroll-cue::after{animation:none}
   :global(.hero-title .ch){opacity:1 !important;animation:none !important}
-  .hero-sub,.sekki{opacity:1 !important;transform:none !important;transition:none}
+  .hero-sub{opacity:1 !important;transform:none !important;transition:none}
 }
 </style>
 
@@ -139,31 +106,5 @@
     }
   };
 
-  /* ---- 二十四節気（近似日付） ---- */
-  var SEKKI = [
-    [1,5,"小寒","しょうかん"],[1,20,"大寒","だいかん"],
-    [2,4,"立春","りっしゅん"],[2,19,"雨水","うすい"],
-    [3,5,"啓蟄","けいちつ"],[3,20,"春分","しゅんぶん"],
-    [4,4,"清明","せいめい"],[4,20,"穀雨","こくう"],
-    [5,5,"立夏","りっか"],[5,21,"小満","しょうまん"],
-    [6,5,"芒種","ぼうしゅ"],[6,21,"夏至","げし"],
-    [7,7,"小暑","しょうしょ"],[7,22,"大暑","たいしょ"],
-    [8,7,"立秋","りっしゅう"],[8,23,"処暑","しょしょ"],
-    [9,7,"白露","はくろ"],[9,23,"秋分","しゅうぶん"],
-    [10,8,"寒露","かんろ"],[10,23,"霜降","そうこう"],
-    [11,7,"立冬","りっとう"],[11,22,"小雪","しょうせつ"],
-    [12,7,"大雪","たいせつ"],[12,21,"冬至","とうじ"]
-  ];
-  var now = new Date();
-  var cur = SEKKI[SEKKI.length-1]; /* 年始は冬至扱い */
-  var m = now.getMonth()+1, d = now.getDate();
-  for(var i=0;i<SEKKI.length;i++){
-    var s = SEKKI[i];
-    if(m > s[0] || (m === s[0] && d >= s[1])) cur = s;
-  }
-  var seal = document.getElementById("sekkiSeal");
-  var yomi = document.getElementById("sekkiYomi");
-  if(seal) seal.textContent = cur[2];
-  if(yomi) yomi.textContent = cur[3];
 })();
 </script>
