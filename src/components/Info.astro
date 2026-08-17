@@ -9,8 +9,8 @@ const info = await getInfo();
   <div class="info-grid">
     <table class="info-table reveal">
       <tr><th>店名</th><td>楽食ふじた</td></tr>
-      <tr><th>住所</th><td>東京都目黒区中目黒2-0-16 ウィングルビル1F</td></tr>
-      <tr><th>アクセス</th><td>東急東横線・日比谷線「中目黒駅」より徒歩数分</td></tr>
+      <tr><th>住所</th><td>東京都目黒区中目黒2-0-16 ウィングビル1F</td></tr>
+      <tr><th>アクセス</th><td>東急東横線・日比谷線「中目黒駅」より徒歩7分</td></tr>
       <tr><th>電話</th><td><a href="tel:0364512969">03-6451-2969</a></td></tr>
       <tr><th>営業時間</th><td set:html={info.hours.replace(/\n/g, '<br/>')} /></tr>
       {info.holiday && <tr><th>定休日</th><td>{info.holiday}</td></tr>}

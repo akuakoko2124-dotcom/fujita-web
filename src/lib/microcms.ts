@@ -58,7 +58,7 @@ export const getMenus = async (queries?: any) => {
 export const getInfo = async (queries?: any) => {
   if (import.meta.env.MICROCMS_SERVICE_DOMAIN === undefined) {
     return {
-      hours: "店舗にご確認ください（実装時に正式情報を掲載）",
+      hours: "18:00 - 23:00（L.O. 料理21:00）",
       holiday: "",
       note: "",
       createdAt: "", updatedAt: "", publishedAt: "", revisedAt: ""
