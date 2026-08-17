@@ -6,7 +6,7 @@
       <p class="eyebrow">想い</p>
       <h2 class="sec-title">奇をてらわず、正統に。</h2>
       <p class="lead">基本、コースはありません。その日の朝、店主・藤田が豊洲で目利きした魚と旬の素材が、お品書きに並びます。焼き魚をもう一皿、〆は土鍋ご飯。好きなものを、好きなように——それが「楽食」です。</p>
-      <p class="lead">日本酒は、店主の故郷・福島の地酒を中心に。肩肘張らずに、大人がゆったり過ごせる二十席の割烹です。<br>※おまかせコースもご用意はございますので希望の方は店舗へお問い合わせください。</p>
+      <p class="lead">日本酒は、店主の故郷・福島の地酒を中心に。肩肘張らずに、大人がゆったり過ごせる二十席の割烹です。<br><span class="note">※おまかせコースもご用意はございますので希望の方は店舗へお問い合わせください。</span></p>
     </div>
     <div class="concept-tate reveal">
       今日の魚と、<br>今日の酒と。
@@ -22,6 +22,13 @@
   font-size:clamp(20px,2.2vw,26px);
   letter-spacing:.3em;line-height:2.3;
   min-height:300px;margin:0 auto;
+}
+.note{
+  display:inline-block;
+  margin-top:10px;
+  font-size:12px;
+  color:var(--mut);
+  letter-spacing:.1em;
 }
 @media (max-width:860px){
   .concept-grid{grid-template-columns:1fr;gap:40px}
