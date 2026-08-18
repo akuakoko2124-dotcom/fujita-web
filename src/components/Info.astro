@@ -13,7 +13,7 @@ const info = await getInfo();
       <tr><th>電話</th><td><a href="tel:0364512969">03-6451-2969</a></td></tr>
       <tr><th>営業時間</th><td set:html={info.hours.replace(/\n/g, '<br/>')} /></tr>
       {info.holiday && <tr><th>定休日</th><td>{info.holiday}</td></tr>}
-      <tr><th>席数</th><td>カウンター・テーブル 約20席</td></tr>
+      <tr><th>席数</th><td>カウンター・テーブル 約12席</td></tr>
       {info.note && <tr><th>備考</th><td set:html={info.note.replace(/\n/g, '<br/>')} /></tr>}
     </table>
     <div class="info-map reveal">
